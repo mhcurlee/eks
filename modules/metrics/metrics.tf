@@ -1,14 +1,12 @@
 
 
 # Install metrics server
+# TODO: yamldecode does not deal with multiple blocks with --- sep.  Had to break into 9 files and loop.
 resource "kubernetes_manifest" "metrics-server" {
   count = 9
   manifest = yamldecode(file("${path.module}/${count.index}.yaml"))
   
 }
-
-
-
 
 
 # Install prometheus
