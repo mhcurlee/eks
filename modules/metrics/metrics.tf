@@ -18,7 +18,7 @@ resource "kubernetes_namespace" "prometheus-namespace" {
     }
     name = "prometheus"
   }
- 
+  
 }
 
 
@@ -28,6 +28,7 @@ resource "helm_release" "prometheus" {
   chart      = "prometheus"
   namespace = "prometheus"
   
+  
   set {
     name  = "alertmanager.persistentVolume.storageClass"
     value = "gp2"
@@ -36,5 +37,6 @@ resource "helm_release" "prometheus" {
     name  = "server.persistentVolume.storageClass"
     value = "gp2"
   }
+
   
 }

@@ -20,10 +20,17 @@ module "eks" {
 
 
   map_roles = [
+    
     {
-      rolearn  = var.k8s_admin_role_arn
+      rolearn  = aws_iam_role.k8s-admin-role.arn
       username = "cluster-admin"
       groups   = ["system:masters"]
+    },
+    {
+      rolearn  = aws_iam_role.k8s-dev-role.arn
+      username = "dev-user"
+      groups   = [""]
+
     }
   ]
 
@@ -41,6 +48,7 @@ module "eks" {
       asg_desired_capacity = var.cluster_asg_desired_capacity
       asg_max_size         = var.cluster_asg_max_size
       instance_type        = var.cluster_instance_type
+      subnets              = module.vpc.private_subnets
     }
   ]
 
