@@ -20,7 +20,7 @@ module "eks" {
 
 
   map_roles = [
-    
+
     {
       rolearn  = aws_iam_role.k8s-admin-role.arn
       username = "cluster-admin"
